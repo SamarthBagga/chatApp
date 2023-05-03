@@ -2,19 +2,36 @@ import React,{useState} from 'react'
 import Cookies from 'universal-cookie'
 import axios from 'axios'
 import signinImage from '../assets/signup.jpg'
-import { initialState } from 'stream-chat-react/dist/components/Channel/channelState'
 
+const initialState={
+    fullName:'',
+    username:'',
+    password:'',
+    confirmpassword:'',
+    phoneNumber:'',
+    avatarURL:'',
+}
 function Auth() {
-    const [isSignup,setIsSignup]=useState(false);
-    const handleChange=()=>{
+    const [form,setForm]=useState(initialState);
+    const [isSignup,setIsSignup]=useState(true);
+    const handleChange=(e)=>{
+        setForm({...form,[e.target.name]: e.target.value});
+        
 
+    }
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        console.log(form);
+    }
+    const switchMode=()=>{
+        setIsSignup((prevIsSignup)=> !prevIsSignup);
     }
   return (
     <div className='auth__form-container'>
         <div className='auth__form-container_fields'>
             <div className='auth__form-container_fields-content'>
                 <p>{isSignup ? 'Sign up' : 'Sign in'}</p>
-                <form onSubmit={()=>{}}>
+                <form onSubmit={handleSubmit}>
                     {isSignup && (
                         <div className='auth__form-container_fields-content_input'>
                             <label htmlFor='fullName'>Full Name</label>
@@ -81,6 +98,9 @@ function Auth() {
                                 required/>
                         </div>
                     )}
+                    <div className='auth__form-container_fields-content_button'>
+                        <button>{isSignup ? "Sign up" : "Sign in"}</button>
+                    </div>
                 </form>
                 <div className='auth__form-container-fields-account'>
                     <p>
@@ -95,7 +115,9 @@ function Auth() {
                 </div>
             </div>
         </div>
-
+        <div className='auth__form-container_image'>
+            <img src={signinImage} alt="sign in" />
+        </div>
     </div>
   )
 }

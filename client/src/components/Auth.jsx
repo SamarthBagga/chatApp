@@ -31,6 +31,7 @@ function Auth() {
         <div className='auth__form-container_fields'>
             <div className='auth__form-container_fields-content'>
                 <p>{isSignup ? 'Sign up' : 'Sign in'}</p>
+                <h1>Rahul is gay</h1>
                 <form onSubmit={handleSubmit}>
                     {isSignup && (
                         <div className='auth__form-container_fields-content_input'>
